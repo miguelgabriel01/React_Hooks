@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React Aula 1</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+
+  <h1>React JS - Aula 01</h1>
+  <div id="app"></div>
+
+  <script type="text/babel">
+
+  const Compras = () => {
+    const [contador, setContador] = React.useState(0);
+
+    function Comprar(){
+      setContador(contador + 1);
+    }
+    return (
+      <div>
+      <button onClick={Comprar}>Comprar</button>
+      <p>Total: {contador}</p>
+      <small>Preço: R${contador * 180}</small>
+      </div>
+    )
+  }
+  const Button = () => {
+
+    function handleclick (event){
+     console.log(event.target.innerText);
+    }
+
+    return <button onClick={handleclick}>Comprar</button>
+  }   
+
+  const Titulo = () => {
+    const numeroaleatorio = Math.random() * 1000;
+    return <h1>Meu site de compras {numeroaleatorio}</h1>
+  }
+
+  const App = () => {
+     return <div>
+     <Titulo />
+     Meu App
+     <Button />
+     <div>Compre aqui tmb</div>
+     <Button />
+     <Compras />
+     </div>
+   }
+
+   ReactDOM.render(<App />, document.getElementById('app'));
+
+  </script>
+</body>
+</html>

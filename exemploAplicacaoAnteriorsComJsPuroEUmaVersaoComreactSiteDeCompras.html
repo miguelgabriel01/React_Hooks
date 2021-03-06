@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aula 02 - React</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+  <h1>Sistema de compras feito com JavaScript Puro</h1>
+  <h3>Mesmo exemplo da Aula 01</h3>
+
+  <div id="app-javascript">
+    <p>Total: <span id="total"></span></p>
+    <p>Preço: R$<span id="preco"></span></p>
+    <button id="button">Comprar</button>
+  </div>
+  <small>-----------------------------------------------------------------------------------------------------------------------------------------------------</small>
+
+  <script type="application/javascript">
+    const total = document.getElementById('total');//seleciona a tag pelo ID
+    const preco = document.getElementById('preco');//seleciona a tag pelo ID
+    const button = document.getElementById('button');//seleciona a tag pelo ID
+
+    var contador = 1;//define o valor padrão do contador
+    
+    //função para atualizar o valor do item
+    function atualizarValores (contador){
+      total.innerText = contador;//alterar o valor do html
+      preco.innerText = contador * 287;//responsavel por fazer o calculo
+    }
+    
+    atualizarValores(contador);//permite que sempre que a pag for recarregada, ela venha por padrão com o valor inicial.
+
+    function handleClick (){
+      contador = contador + 1;//o contador vai receber uma add
+      atualizarValores(contador);
+      console.log("Valor do contador: " + contador);
+    }
+    button.addEventListener('click',handleClick);//a função é ativa apos o click do usuario;
+  </script>
+
+<h1>Sistema de compras feito com React js</h1>
+
+<div id="app-react"></div>
+
+<script type="text/babel">
+ const Comprar = () => {
+   const [contador, setContador] = React.useState(1);//criamos uma const informando uma variavel contador estado inicial dela "1".
+
+   return (
+    <div>
+     <p>Total: {contador}</p>
+     <p>Preço: {contador * 180}</p>
+     <button onClick={() => setContador(contador + 1)}>Comprar</button> 
+    </div>
+   )
+ }
+
+ //Aqui redenrizamos na tela nossos componentes
+ ReactDOM.render(<Comprar />, document.getElementById('app-react'));
+
+</script>
+</body>
+</html>
