@@ -1,25 +1,30 @@
 import React from 'react';
+import Produto from './Produto';
 
 const App = () => {
-  const [contar, setContar] = React.useState(1);
-  const [items, setItems] = React.useState(['Item 1']);
+  const [dados, setDados] = React.useState(null);
+  const [carregando, setCarregando] = React.useState(null);
 
-  function handleClick() {
-    setContar(contar + 1);
-      // setContar possui um efeito colateral.
-      setItems([...items, 'Item ' + (contar + 1)]);
-    // Tirar o efeito de dentro do setContar irá concertar o erro
-    // setItems((items) => [...items, 'Item ' + (contar + 1)]);
+  async function handleClick(event) {
+    setCarregando(true);
+    const response = await fetch(
+      `https://ranekapi.origamid.dev/json/api/produto/${event.target.innerText}`,
+    );
+    const json = await response.json();
+    console.log(json);
+    setDados(json);
+    setCarregando(false);
   }
 
   return (
     <>
-      <button onClick={handleClick}>{contar}</button>
-
-      {items.map((item) => (
-        <li key={item}>{item}</li>
-      ))}
+      <button onClick={handleClick}>smartphone</button>
+      <button onClick={handleClick}>tablet</button>
+      <button onClick={handleClick}>notebook</button>
+      {carregando && <p>Carregando...</p>}
+      {!carregando && dados && <Produto dados={dados} />}
     </>
   );
 };
+
 export default App;
