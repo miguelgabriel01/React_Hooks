@@ -1,26 +1,27 @@
 import React from 'react';
-
 const App = () => {
-  const [contar,setContar] = React.useState(0);
-
-  React.useEffect (() =>{
-    console.log('apenas quando redenriza');
-  },[]);
+  const [contar, setContar] = React.useState(0);
+  const [dados, setDados] = React.useState(null);
 
   React.useEffect(() => {
-    console.log("Apenas quando o contar for atualizado");
-    document.title = 'contar' + contar;
-  },[contar]);
-
-  console.log('sempre ocorre,mas antes do useEffect');
+    // se o fetch estivesse fora do useEffect, toda vez que o componente
+    // fosse atualizado, o mesmo seria executado
+    fetch('https://ranekapi.origamid.dev/json/api/produto/notebook')
+      .then((response) => response.json())
+      .then((json) => setDados(json));
+  }, []);
 
   return (
-   <>
-   <h1>Useeffect1</h1>
-   <small>exemplo do uso do useEffect</small>
-  <button onClick={() => setContar(contar+1)}>{contar}</button>
-   </>
+    <div>
+      {dados && (
+        <div>
+          <h1>{dados.nome}</h1>
+          <p>R$ {dados.preco * contar}</p>
+        </div>
+      )}
+      <button onClick={() => setContar(contar + 1)}>{contar}</button>
+    </div>
   );
-}
+};
 
 export default App;
