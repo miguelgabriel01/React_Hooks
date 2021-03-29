@@ -1,24 +1,32 @@
 import React from 'react';
+import Produto from './Produto';
+
 const App = () => {
-  const [contar, setContar] = React.useState(0);
-  const [modal, setModal] = React.useState(false);
+  const [produto, setProduto] = React.useState(null);
 
   React.useEffect(() => {
-    document.title = 'Total ' + contar;
-  }, [contar]);
+    const produtoLocal = window.localStorage.getItem('produto');
+    if (produtoLocal !== 'null') setProduto(produtoLocal);
+  }, []);
 
   React.useEffect(() => {
-    setContar(0);
-  }, [modal]);
+    if (produto !== null) window.localStorage.setItem('produto', produto);
+  }, [produto]);
+
+  function handleClick({ target }) {
+    setProduto(target.innerText);
+  }
 
   return (
     <div>
-      {modal && <p>Meu Modal</p>}
-      <button onClick={() => setModal(!modal)}>Modal</button>
-      <hr />
-      <button onClick={() => setContar(contar + 1)}>{contar}</button>
+      <h1>Preferência: {produto}</h1>
+      <button style={{ marginRight: '1rem' }} onClick={handleClick}>
+        notebook
+      </button>
+      <button onClick={handleClick}>smartphone</button>
+      <Produto produto={produto} />
     </div>
   );
 };
- 
+
 export default App;
