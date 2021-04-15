@@ -1,0 +1,35 @@
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    width: 100%;
+    height: 100%;
+    background-color: #12222D;
+  }
+
+  .dashboard{
+    width: 100%;
+    height: 100%;
+
+    border:2px solid blue;
+    
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+  }
+
+  .panoramas{
+    width: 700px;
+    border: 2px solid green;
+  }
+  #caixagrafico{
+    width: 100%;
+    height: 335px;
+
+    border: 2px solid red;
+
+    display: flex;
+    justify-content: center;
+    align-content: center;
+  }
